@@ -1,0 +1,12 @@
+/* src/styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+@layer components {
+    .socialIcon {
+      @apply w-11 border-[1px] border-blue-400 border-solid h-11 rounded-full px-2 py-1 text-pink-500  hover:text-blue-400 cursor-pointer transition duration-200 hover:animate-pulse;
+    }
+  }
