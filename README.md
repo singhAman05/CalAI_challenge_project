@@ -1,19 +1,24 @@
-#CalAI Challenge Project
-Welcome to the CalAI Challenge Project! This repository contains an educational technology (EdTech) project aimed at providing learning resources to users. Below, you'll find details about the project and its tech stack.
-This project has frontend with `Landing Page` and `Courses` and `Stripe Payment Gateway`.
+# CalAI Challenge Project
 
-#Overview
+Welcome to the CalAI Challenge Project! This repository contains an educational technology (EdTech) project aimed at providing learning resources to users. Below, you'll find details about the project and its tech stack. This project has frontend with Landing Page and Courses and Stripe Payment Gateway.
+
+# Overview
 The CalAI Challenge Project is an EdTech platform designed to offer various learning resources to users. It leverages modern technologies to provide an interactive and engaging learning experience.
 
-#Tech Stack
-> Frontend
- -React.js: The frontend of the project is built using React.js, a popular JavaScript library for building user interfaces. React.js allows for the creation of dynamic and responsive UI components.
--Tailwind CSS: Tailwind CSS is used for styling the frontend components. It provides a utility-first approach to CSS, allowing for rapid development and easy customization of styles.
-> Backend
--Express.js: Express.js is a fast, unopinionated, and minimalist web framework for Node.js. It is used to build the backend API endpoints and handle server-side logic.
--Firebase: Firebase provides various backend services such as authentication, database, storage, and hosting. It is used in conjunction with Express.js to handle user authentication and other backend functionalities.
+# Tech Stack
+- # Frontend
+  - # React.js:
+    The frontend of the project is built using React.js, a popular JavaScript library for building user interfaces. React.js allows for the creation of dynamic and responsive UI components.
+  - # Tailwind CSS:
+    Tailwind CSS is used for styling the frontend components. It provides a utility-first approach to CSS, allowing for rapid development and easy customization of styles.
+  
+- # Backend
+  - # Express.js:
+    Express.js is a fast, unopinionated, and minimalist web framework for Node.js. It is used to build the backend API endpoints and handle server-side logic.
+  - # Firebase:
+    Firebase provides various backend services such as authentication, database, storage, and hosting. It is used in conjunction with Express.js to handle user authentication and other backend functionalities.
 
-#Installation
+# Installation
 To set up the CalAI Challenge Project locally, follow these steps:
 1. Clone the repository: `git clone https://github.com/<your-username>/CalAI_challenge_project.git`
 2. Navigate to the project directory: `cd CalAI_challenge_project`
@@ -30,6 +35,7 @@ STRIPE_SECRET_KEY="YOUR_STRIPE_SECRET_KEY"
 SERVER_PORT="YOUR_SERVER_PORT"
 4. Isntall all dependencies : `npm install`
 5. Have Two Split Screens:
-> npm start `Frontend`
-> npm/nodemon server.js `Backend`
+   > 1. **Frontend**: `npm start`.
+   > 2. **Backend**: `npm/nodemon server.js`.
+
 6. Access the application in your browser: `Open http://localhost:3000 to view the frontend.`
