@@ -20,7 +20,7 @@ The CalAI Challenge Project is an EdTech platform designed to offer various lear
 
 # Installation
 To set up the CalAI Challenge Project locally, follow these steps:
-1. Clone the repository: `git clone https://github.com/<your-username>/CalAI_challenge_project.git`
+1. Clone the repository: `git clone https://github.com/singhAman05/CalAI_challenge_project.git`
 2. Navigate to the project directory: `cd CalAI_challenge_project`
 3. Create a .env file in the root directory with the following content: 
 > REACT_APP_STRIPE_PUBLIC_KEY="YOUR_STRIPE_PUBLIC_KEY"
