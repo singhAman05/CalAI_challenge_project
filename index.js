@@ -166,8 +166,8 @@ app.post("/create-order", async (req, res) => {
     application_context: {
       brand_name: "PRACTICE INC",
       locale: "en-US",
-      return_url: "http://localhost:3000/success", // This is the returnUrl
-      cancel_url: "http://localhost:3000/cancel", // Your cancel URL
+      return_url: "https://fastidious-pixie-4a8646.netlify.app/success", // This is the returnUrl
+      cancel_url: "https://fastidious-pixie-4a8646.netlify.app/cancel", // Your cancel URL
     },
   };
   const accessToken = await generateToken();
