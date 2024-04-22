@@ -1,7 +1,65 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 const SuccessPage = () => {
+  useEffect(() => {
+    const captureOrder = async () => {
+      try {
+        // Get the orderId from the URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get("token");
+        console.log(orderId);
+        if (!orderId) {
+          console.error("Order ID not found in URL.");
+          return;
+        }
+
+        // Capture the order
+        const captureResponse = await axios.post(
+          "http://localhost:5000/capture-order",
+          {
+            orderId: orderId,
+          }
+        );
+
+        console.log("Order Captured:", captureResponse.data);
+
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            const userEmail = user.email;
+            console.log("User email:", userEmail);
+            // Send a thank you email to the user
+            await axios.post("http://localhost:5000/send-email", {
+              email: userEmail,
+            });
+            // Store capture response data in Firestore
+            const db = getFirestore();
+            const orderRef = collection(db, "orders");
+            await addDoc(orderRef, {
+              userId: user.uid,
+              orderId: orderId,
+              captureResponse: captureResponse.data,
+              userEmail: userEmail,
+              timestamp: new Date(),
+            });
+
+            alert("Your payment has been Successful");
+          } else {
+            console.error("User not logged in.");
+          }
+        });
+      } catch (error) {
+        console.error("Error capturing order:", error.message);
+        // Handle error as needed
+      }
+    };
+
+    captureOrder(); // Call the function when the component mounts
+  }, []); // Empty dependency array to run only once on mount
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="bg-white shadow-md rounded-md p-8 text-center max-w-md">

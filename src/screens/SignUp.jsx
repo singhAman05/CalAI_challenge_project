@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { app, googleAuthProvider } from "../firebase/firebase";
 import CTA from "../images/achievement.png";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -8,9 +9,12 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
+import Loader from "../components/loader/Loader";
+// const sendWelcomeEmail = require("../sendEmail");
 
 const AuthPage = () => {
   const auth = getAuth(app);
+  const [loading, setloading] = useState(false);
   const [isSignup, setIsSignup] = useState(false); // Changed to false initially
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +25,7 @@ const AuthPage = () => {
 
   const handleAuthAction = async (e) => {
     e.preventDefault();
+    setloading(true);
     try {
       if (isSignup) {
         // Signup
@@ -31,6 +36,7 @@ const AuthPage = () => {
         );
         const user = userCredential.user;
         console.log("User signed up:", user);
+        await axios.post("http://localhost:5000/register", { email });
       } else {
         // Login
         const userCredential = await signInWithEmailAndPassword(
@@ -39,16 +45,20 @@ const AuthPage = () => {
           password
         );
         const user = userCredential.user;
+        // await sendWelcomeEmail(email);
         console.log("User logged in:", user);
         navigate("/");
       }
     } catch (error) {
       setErrorMessage(error.message);
       console.error("Authentication error:", error.message);
+    } finally {
+      setloading(false);
     }
   };
 
-  const handleGoogleSignIn = async () => {
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
     try {
       const result = await signInWithPopup(auth, googleAuthProvider);
       const user = result.user;
@@ -70,6 +80,7 @@ const AuthPage = () => {
 
   const handleRegistrationSubmit = async (e) => {
     e.preventDefault();
+    setloading(true);
     try {
       // Perform registration logic here
       console.log(
@@ -85,16 +96,20 @@ const AuthPage = () => {
         password
       );
       const user = userCredential.user;
+      await axios.post("http://localhost:5000/register", { email });
       console.log("User signed up:", user);
       navigate("/");
     } catch (error) {
       setErrorMessage(error.message);
       console.error("Registration error:", error.message);
+    } finally {
+      setloading(false);
     }
   };
 
   return (
     <>
+      {loading && <Loader />}
       <section className="bg-gray-50 min-h-screen flex items-center justify-center">
         <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
